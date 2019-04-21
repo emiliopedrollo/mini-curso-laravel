@@ -15,20 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello/{name}', function ($name) {
-    return "Hello ".$name;
-});
-
-Route::post('/hello/{name}', function (\Illuminate\Http\Request $request, $name) {
-    return "Hello ".$name."\nConteúdo: ".$request->getContent();
-});
-
-Route::match(['put','patch','delete'],'/hello/{name}', function (\Illuminate\Http\Request $request, $name) {
-    return "Hello ".$name.
-        "\nMétodo: ".
-        $request->method().
-        "\nConteúdo: ".
-        $request->getContent();
+Route::any('/hello/{name}', function (\Illuminate\Http\Request $request, $name) {
+    return view('hello', [
+        'method' => $request->method(),
+        'content' => $request->getContent(),
+        'name' => $name
+    ]);
 });
 
 Route::get('/final', function() {
