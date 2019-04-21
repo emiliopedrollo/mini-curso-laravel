@@ -15,13 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any('/hello/{name}', function (\Illuminate\Http\Request $request, $name) {
-    return view('hello', [
-        'method' => $request->method(),
-        'content' => $request->getContent(),
-        'name' => $name
-    ]);
-});
+Route::any('/hello/{name}', 'HelloController@index');
 
 Route::get('/final', function() {
     return "This is your final destination!!";
@@ -29,22 +23,7 @@ Route::get('/final', function() {
 
 Route::redirect("/old_path","/final");
 
-Route::prefix('post')->group(function() {
-
-    // 123e4567-e89b-12d3-a456-426655440000
-    Route::get('/{uuid}', function ($uuid) {
-        return "Post with uuid $uuid";
-    })->where(['uuid' => '^[0-9a-fA-F]{8}(\-[0-9a-fA-F]{4}){3}\-[0-9a-fA-F]{12}$']);
-
-    Route::get('/{id}', function ($id) {
-        return "Post with id $id";
-    })->where(['id' => '[0-9]+']);
-
-    Route::get('/{slug}', function ($slug) {
-        return "Post with slug $slug";
-    })->where(['slug' => '[A-Za-z0-9\-]+']);
-
-});
+Route::resource('post','PostController');
 
 Route::get('/a-route', function(){
     return now();
