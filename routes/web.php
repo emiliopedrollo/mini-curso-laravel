@@ -36,3 +36,6 @@ Route::get('/where-is-now', function(){
 Route::get('/redirect-me-to-now', function() {
     return redirect()->route('now');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
