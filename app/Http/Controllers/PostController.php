@@ -8,7 +8,6 @@ use App\Post;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -50,13 +49,7 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-        Post::create(array_merge(
-            $request->validated(),
-            [
-                'slug' => Str::slug($request->input('title')),
-                'author_id' => $request->user()->getKey()
-            ]
-        ));
+        Post::create($request->validated());
 
         $request->session()->flash('status','Post saved successfully');
 
@@ -95,13 +88,7 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
-        $post->update(array_merge(
-            $request->validated(),
-            [
-                'slug' => Str::slug($request->input('title')),
-                'author_id' => $request->user()->getKey()
-            ]
-        ));
+        $post->update($request->validated());
         $request->session()->flash('status','Post updated successfully');
         return redirect()->route('posts.show',$post->slug);
     }
