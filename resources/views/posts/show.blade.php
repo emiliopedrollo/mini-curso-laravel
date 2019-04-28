@@ -18,13 +18,17 @@
                         <div class="card-text my-3">
                             {!! nl2br(e($post->content)) !!}
                         </div>
-                        <a href="{{route('posts.edit',$post->id)}}" class="card-link">Edit</a>
+                        @can('update',$post)
+                        <a href="{{route('posts.edit',$post->slug)}}" class="card-link">Edit</a>
+                        @endcan
 
-                        <form method="post" id="deleteForm" class="d-inline" action="{{ route('posts.destroy',$post->id) }}">
+                        @can('update',$post)
+                        <form method="post" id="deleteForm" class="d-inline" action="{{ route('posts.destroy',$post->slug) }}">
                             @csrf
                             @method('DELETE')
                             <a href="javascript:document.getElementById('deleteForm').submit()" class="card-link">Delete</a>
                         </form>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-title"></div>

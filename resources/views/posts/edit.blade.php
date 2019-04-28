@@ -6,7 +6,7 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <form method="post" action="{{ route('posts.update',$post->id) }}">
+                    <form method="post" action="{{ route('posts.update',$post->slug) }}">
                         <div class="card-header">Edit Post</div>
                         <div class="card-body">
                             @csrf
