@@ -15,6 +15,10 @@
                     @endif
 
                     You are logged in!
+                    <br/>
+
+                    <a href="{{ route('posts.index') }}">View posts</a>
+
                 </div>
             </div>
         </div>

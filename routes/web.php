@@ -23,7 +23,7 @@ Route::get('/final', function() {
 
 Route::redirect("/old_path","/final");
 
-Route::resource('post','PostController');
+Route::resource('posts','PostController');
 
 Route::get('/a-route', function(){
     return now();
